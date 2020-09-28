@@ -32,14 +32,19 @@ def new_table(table_name):
         for i in range(0, len(columns)):
             query = query + columns[i] + " " + types[i] + " " + attr[i] + ","
 
+        print(query)
         cur.execute(query)
         cur.close()
         conn.commit()
-        return  json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
     except (Exception, ps.DatabaseError) as error:
         print(error)
+        return  json.dumps({'message': ' ' + table_name + ' has !not! been created'}, sort_keys=False, indent=4), 200
+
     finally:
         if conn is not None:
             conn.close()
+            
+    return json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
+
 
 app.run(host='0.0.0.0', port=5000)
