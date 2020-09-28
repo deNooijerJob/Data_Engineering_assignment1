@@ -22,4 +22,4 @@ ENV PSQL_USR postgres
 ENV PSQL_PASS DE2020_group6
 
 #run the api
-CMD ["python3", "db_api"]
+CMD ["python3", "db_api.py"]
