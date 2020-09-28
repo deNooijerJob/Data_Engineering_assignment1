@@ -7,4 +7,4 @@ app.config["DEBUG"] = True
 def ping():
     return json.dumps({"message": "alive"}, sort_keys=False, indent=4), 200
 
-app.run(host='0, 0, 0, 0', port=5000)
+app.run(host='0.0.0.0', port=5000)
