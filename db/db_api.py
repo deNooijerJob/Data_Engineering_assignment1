@@ -1,29 +1,45 @@
 from flask import Flask, json, Request, Response
-import psycopg2 as psql
+import psycopg2 as ps
 import os
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+conn = None
 
-conn = psql.connect(
-    host=os.environ['PSQL_HOST'],
-    port=os.environ['PSQL_PORT'],
-    user=os.environ['PSQL_USR'],
-    password=os.environ['PSQL_PASS'],
-    database=os.environ['PSQL_DB']
+def connect():
+    conn = ps.connect(
+        host=os.environ['PSQL_HOST'],
+        port=os.environ['PSQL_PORT'],
+        user=os.environ['PSQL_USR'],
+        password=os.environ['PSQL_PASS'],
+        database=os.environ['PSQL_DB']
+    )
+    return conn
 
-)
 
-@app.route('/db/ping', methods=['POST'])
-def ping():
-    # create a cursor
-    cur = conn.cursor()
+@app.route('/db/newTable/<table_name>', method=['POST'])
+def new_table(table_name):
+    try:
+        conn = connect()
+        cur = conn.cursor()
 
-    # execute a statement
-    cur.execute('SELECT version()')
-    # display the PostgreSQL database server version
-    db_version = cur.fetchone()
+        data = Request.get_json()
+        columns = data['columns']
+        types = data['types']
+        attr = data['attr']
 
-    return json.dumps({"message": "PostgreSQL database version:" + str(db_version)}, sort_keys=False, indent=4), 200
+        query = "CREATE TABLE " + str(table_name)
+        for i in range(0, len(columns)):
+            query = query + columns[i] + " " + types[i] + " " + attr[i] + ","
+
+        cur.execute(query)
+        cur.close()
+        conn.commit()
+        return  json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
+    except (Exception, ps.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
 
 app.run(host='0.0.0.0', port=5000)
