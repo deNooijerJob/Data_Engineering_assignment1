@@ -17,7 +17,7 @@ def connect():
     return conn
 
 
-@app.route('/db/newTable/<table_name>', method=['POST'])
+@app.route('/db/newTable/<table_name>', methods=['POST'])
 def new_table(table_name):
     try:
         conn = connect()
