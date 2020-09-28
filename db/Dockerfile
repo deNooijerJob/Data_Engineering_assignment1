@@ -5,7 +5,7 @@ FROM python:3.7.7-buster
 WORKDIR /usr/src/assignment1
 
 #copy the python imports
-COPY requirements.txt
+COPY requirements.txt .
 
 # install the imports from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
