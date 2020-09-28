@@ -38,12 +38,12 @@ def new_table(table_name):
         conn.commit()
     except (Exception, ps.DatabaseError) as error:
         print(error)
-        return  json.dumps({'message': ' ' + table_name + ' has !not! been created'}, sort_keys=False, indent=4), 200
+        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
 
     finally:
         if conn is not None:
             conn.close()
-            
+
     return json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
 
 
