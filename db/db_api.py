@@ -17,7 +17,7 @@ def connect():
     return conn
 
 
-@app.route('/db/newTable/<table_name>', methods=['POST'])
+@app.route('/db/newTable/<table_name>/', methods=['POST'])
 def new_table(table_name):
     try:
         conn = connect()
@@ -42,7 +42,7 @@ def new_table(table_name):
         conn.commit()
     except (Exception, ps.DatabaseError) as error:
         print(error)
-        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
+        return json.dumps({'message': error}, sort_keys=False, indent=4), 500
 
     finally:
         if conn is not None:
@@ -51,7 +51,7 @@ def new_table(table_name):
     return json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
 
 
-@app.route('/db/insert/<table_name>', methods=['PUT'])
+@app.route('/db/insert/<table_name>/', methods=['PUT'])
 def insert(table_name):
     try:
         conn = connect()
@@ -72,7 +72,7 @@ def insert(table_name):
         conn.commit()
     except (Exception, ps.DatabaseError) as error:
         print(error)
-        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
+        return json.dumps({'message': error}, sort_keys=False, indent=4), 500
 
     finally:
         if conn is not None:
@@ -81,7 +81,7 @@ def insert(table_name):
     return json.dumps({'message': table_name + ' has been updated'}, sort_keys=False, indent=4), 200
 
 
-@app.route('/db/getTableContent/<table_name>', methods=['GET'])
+@app.route('/db/getTableContent/<table_name>/', methods=['GET'])
 def get_content(table_name):
     try:
         conn = connect()
@@ -104,5 +104,6 @@ def get_content(table_name):
             conn.close()
 
     return json.dumps(records, sort_keys=False, indent=4), 200
+
 
 app.run(host='0.0.0.0', port=5000)
