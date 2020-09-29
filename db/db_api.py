@@ -31,7 +31,7 @@ def new_table(table_name):
         query = "CREATE TABLE " + str(table_name) + " ("
         for i in range(0, len(columns)):
             query = query + columns[i] + " " + types[i] + " " + attr[i]
-            if i < len(columns):
+            if i < len(columns) - 1:
                 query = query + ", "
 
         query = query + ")"
