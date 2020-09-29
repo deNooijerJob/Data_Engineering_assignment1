@@ -28,7 +28,7 @@ def new_table(table_name):
         types = data['types']
         attr = data['attr']
 
-        query = "CREATE TABLE " + str(table_name)
+        query = "CREATE TABLE " + str(table_name) + " "
         for i in range(0, len(columns)):
             query = query + columns[i] + " " + types[i] + " " + attr[i] + ","
 
