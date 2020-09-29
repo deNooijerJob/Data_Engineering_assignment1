@@ -1,4 +1,4 @@
-from flask import Flask, json, Request, Response
+from flask import Flask, json, request, Response
 import psycopg2 as ps
 import os
 
@@ -23,7 +23,7 @@ def new_table(table_name):
         conn = connect()
         cur = conn.cursor()
 
-        data = Request.get_json()
+        data = request.get_json()
         columns = data['columns']
         types = data['types']
         attr = data['attr']
