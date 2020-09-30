@@ -17,6 +17,31 @@ def connect():
     return conn
 
 
+@app.route('/db/getTableContent/<table_name>/', methods=['GET'])
+def get_content(table_name):
+    try:
+        conn = connect()
+        cur = conn.cursor()
+
+        query = "SELECT * FROM " + str(table_name)
+
+        print(query)
+        cur.execute(query)
+        records = cur.fetchall()
+
+        cur.close()
+        conn.commit()
+    except (Exception, ps.DatabaseError) as error:
+        print(error)
+        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
+
+    finally:
+        if conn is not None:
+            conn.close()
+
+    return json.dumps(records, sort_keys=False, indent=4), 200
+
+
 @app.route('/db/newTable/<table_name>/', methods=['POST'])
 def new_table(table_name):
     try:
@@ -81,29 +106,6 @@ def insert(table_name):
     return json.dumps({'message': table_name + ' has been updated'}, sort_keys=False, indent=4), 200
 
 
-@app.route('/db/getTableContent/<table_name>/', methods=['GET'])
-def get_content(table_name):
-    try:
-        conn = connect()
-        cur = conn.cursor()
-
-        query = "SELECT * FROM " + str(table_name)
-
-        print(query)
-        cur.execute(query)
-        records = cur.fetchall()
-
-        cur.close()
-        conn.commit()
-    except (Exception, ps.DatabaseError) as error:
-        print(error)
-        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
-
-    finally:
-        if conn is not None:
-            conn.close()
-
-    return json.dumps(records, sort_keys=False, indent=4), 200
 
 
 app.run(host='0.0.0.0', port=5000)
