@@ -17,7 +17,7 @@ def connect():
     return conn
 
 
-@app.route('/db/<table_name>', methods=['GET'])
+@app.route('/training-db/<table_name>', methods=['GET'])
 def get_content(table_name):
     try:
         conn = connect()
@@ -42,7 +42,7 @@ def get_content(table_name):
     return json.dumps(records, sort_keys=False, indent=4), 200
 
 
-@app.route('/db/<table_name>', methods=['POST'])
+@app.route('/training-db/<table_name>', methods=['POST'])
 def new_table(table_name):
     try:
         conn = connect()
@@ -76,7 +76,7 @@ def new_table(table_name):
     return json.dumps({'message': ' ' + table_name + ' has been created'}, sort_keys=False, indent=4), 200
 
 
-@app.route('/db/<table_name>', methods=['PUT'])
+@app.route('/training-db/<table_name>', methods=['PUT'])
 def insert(table_name):
     try:
         conn = connect()
