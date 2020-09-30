@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 5000
 
 #Set env variables
-ENV PSQL_HOST  "172.17.0.2"
+ENV PSQL_HOST  "psql"
 ENV PSQL_PORT "5432"
 ENV PSQL_USR "postgres"
 ENV PSQL_PASS "DE2020_group6"
