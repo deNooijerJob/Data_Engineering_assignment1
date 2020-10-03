@@ -22,4 +22,4 @@ ENV MODEL_REPO  /usr/src/assignment1/models
 
 
 #run the api
-CMD ["python3", "train.py"]
+CMD ["python3", "predict.py"]
