@@ -33,7 +33,7 @@ def train_model(model_name):
         model = QuestionAnsweringModel('bert', "deepset/bert-large-uncased-whole-word-masking-squad2", args=train_args,
                                        use_cuda=False)
         #model.train_model(train_data)
-	path = os.environ['MODEL_REPO'] + "/" + model_name
+	    path = os.environ['MODEL_REPO'] + "/" + model_name
         model.save_model(path, model=model.model)
 
 
