@@ -6,9 +6,10 @@ from simpletransformers.question_answering import QuestionAnsweringModel
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-@app.route('predict/<model>', methods=['POST'])
-def predict(model):
-    model = QuestionAnsweringModel(model, os.environ['MODEL_REPO'], use_cuda=False)
+@app.route('/predict/<model_name>', methods=['POST'])
+def predict(model_name):
+    path = os.environ['MODEL_REPO'] + "/" + model_name
+    model = QuestionAnsweringModel(model_name, path, use_cuda=False)
     question = request.get_json()
 
     result = model.predict(question)
