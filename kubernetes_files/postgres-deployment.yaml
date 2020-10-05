@@ -5,6 +5,9 @@ metadata:
   namespace: bertapp
 spec:
   replicas: 1 #hoevel pods nodig?
+  selector:
+    matchLabels:
+      app: postgres
   template:
     metadata:
       labels:
