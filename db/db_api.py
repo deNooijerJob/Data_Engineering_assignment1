@@ -85,13 +85,23 @@ def insert(table_name):
         data = request.get_json()
 
         for i in range(0, len(data)):
-            query = "INSERT INTO " + str(table_name) + " VALUES ("
+
+            query = "INSERT INTO " + str(table_name) + "("
             len_columns = len(data[i])
-            count = 0
+            c_columns, c_val = 0, 0
+
+            for field in data[i]:
+                c_columns += 1
+                query = query + str(field)
+                if c_columns < len_columns - 1:
+                    query = query + ", "
+
+            query = query + ") VALUES ("
+
             for val in data[i]:
-                count += 1
-                query = query + "'" +  str(data[i][val]) + "'"
-                if count < len_columns - 1:
+                c_val += 1
+                query = query + "'" + str(data[i][val]) + "'"
+                if c_val < len_columns - 1:
                     query = query + ", "
             query = query + ")"
             cur.execute(query)
