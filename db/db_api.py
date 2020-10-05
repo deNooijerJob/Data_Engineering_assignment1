@@ -93,7 +93,7 @@ def insert(table_name):
             for field in data[i]:
                 c_columns += 1
                 query = query + str(field)
-                if c_columns < len_columns - 1:
+                if c_columns < len_columns:
                     query = query + ", "
 
             query = query + ") VALUES ("
@@ -101,7 +101,7 @@ def insert(table_name):
             for val in data[i]:
                 c_val += 1
                 query = query + "'" + str(data[i][val]) + "'"
-                if c_val < len_columns - 1:
+                if c_val < len_columns:
                     query = query + ", "
             query = query + ")"
             cur.execute(query)
