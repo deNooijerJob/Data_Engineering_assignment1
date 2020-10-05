@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+  namespace: bert_app
+spec:
+  type: LoadBalancer #op internet gebruiken ze NodePort
+  ports:
+    - port: 5432 #klopt dit? @job
+  selector:
+    app: postgres
+
+#kubectl create -f postgres-service.yaml

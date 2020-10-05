@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+  namespace: bert_app
+data:
+  PSQL_DB: de2020
+  PSQL_USR: postgres
+  PSQL_PASS: DE2020_group6
+
+#kubectl create -f postgres-configmap.yaml

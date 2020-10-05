@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: bert_app
+spec:
+  replicas: 1 #hoevel pods nodig?
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: #moet de image naam van gcp komen
+          ports:
+            - containerPort: 5432 #klopt dit? @job
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data #klopt dit? @job
+              name: postgresdb
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+
+#kubectl create -f postgres-deployment.yaml
