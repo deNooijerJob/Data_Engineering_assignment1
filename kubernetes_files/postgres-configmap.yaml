@@ -4,7 +4,7 @@ metadata:
   name: postgres-config
   labels:
     app: postgres
-  namespace: bert_app
+  namespace: bertapp
 data:
   POSTGRES_db: de2020
   POSTGRES_USER: postgres

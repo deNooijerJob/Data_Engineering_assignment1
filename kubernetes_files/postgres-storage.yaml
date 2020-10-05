@@ -5,7 +5,7 @@ metadata:
   labels:
     type: local
     app: postgres
-  namespace: bert_app
+  namespace: bertapp
 spec:
   storageClassName: manual
   capacity:

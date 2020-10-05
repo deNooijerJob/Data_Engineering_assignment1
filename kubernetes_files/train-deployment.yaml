@@ -4,7 +4,7 @@ metadata:
   labels:
     app: train
   name: train
-  namespace: bert_app
+  namespace: bertapp
 spec:
   replicas: 2 #hoeveel pods nodig?
   selector:

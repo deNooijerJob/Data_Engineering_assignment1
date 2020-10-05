@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  namespace: bert_app
+  namespace: bertapp
 spec:
   replicas: 1 #hoevel pods nodig?
   template:

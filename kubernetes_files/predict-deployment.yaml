@@ -4,7 +4,7 @@ metadata:
   labels:
     app: predict
   name: predict
-  namespace: bert_app
+  namespace: bertapp
 spec:
   replicas: 2 #hoeveel pods hebben we nodig?
   selector:

@@ -4,7 +4,7 @@ metadata:
   name: postgres
   labels:
     app: postgres
-  namespace: bert_app
+  namespace: bertapp
 spec:
   type: LoadBalancer #op internet gebruiken ze NodePort
   ports:

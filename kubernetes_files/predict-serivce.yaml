@@ -4,7 +4,7 @@ metadata:
   name: predict-service
   labels:
     app: predict
-  namespace: bert_app
+  namespace: bertapp
 spec:
   type: LoadBalancer
   ports:
