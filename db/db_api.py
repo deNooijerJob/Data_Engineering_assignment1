@@ -92,7 +92,7 @@ def insert(table_name):
 
             for field in data[i]:
                 c_columns += 1
-                query = query + str(field)
+                query = query + "'" + str(field) + "'"
                 if c_columns < len_columns - 1:
                     query = query + ", "
 
