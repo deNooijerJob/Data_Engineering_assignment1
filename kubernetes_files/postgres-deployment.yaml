@@ -14,7 +14,7 @@ spec:
         - name: postgres
           image: #moet de image naam van gcp komen
           ports:
-            - containerPort: 5432 #klopt dit? @job
+            - containerPort: 5432
           envFrom:
             - configMapRef:
                 name: postgres-config
