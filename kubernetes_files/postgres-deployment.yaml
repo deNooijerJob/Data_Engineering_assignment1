@@ -7,7 +7,7 @@ spec:
   replicas: 1 #hoevel pods nodig?
   selector:
     matchLabels:
-      app: postgresk
+      app: postgres
   template:
     metadata:
       labels:
@@ -23,7 +23,7 @@ spec:
             - configMapRef:
                 name: postgres-config
           volumeMounts:
-            - mountPath: /usr/src/assignment1/data #klopt dit? @job
+            - mountPath: /usr/src/assignment1/models #klopt dit? @job
               name: de2020
       volumes:
         - name: de2020
