@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: predict
-  name: predict
+    app: train
+  name: train
   namespace: bert_app
 spec:
-  replicas: 2 #hoeveel pods hebben we nodig?
+  replicas: 2 #hoeveel pods nodig?
   selector:
     matchLabels:
-      app: predict
+      app: train
   template:
     metadata:
       labels:
-        app: predict
+        app: train
     spec:
       containers:
-        - name: predict-api
-          image: #image van gcp die wij hebben gepusht
+        - name: train-api
+          image: #gcp push
           volumeMounts:
-            - mountPath: /usr/src/assignment1/models #klopt dit? andere mountPath dan postgress
+            - mountPath: /usr/src/assignment1/models
               name: model-repo
           ports:
             - containerPort: 5000
@@ -27,6 +27,8 @@ spec:
           env:
             - name: MODEL_REPO
               value: /usr/src/assignment1/models
+            - name: DB_API
+              value: http://dbAPI:5000/db/bert
       volumes:
         - name: model-repo
           persistentVolumeClaim:
