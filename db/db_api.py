@@ -90,8 +90,8 @@ def insert(table_name):
             count = 0
             for val in data[i]:
                 count += 1
-                query = query + val
-                if j < len_columns - 1:
+                query = query + "'" +  str(data[i][val]) + "'"
+                if count < len_columns - 1:
                     query = query + ", "
             query = query + ")"
             cur.execute(query)
