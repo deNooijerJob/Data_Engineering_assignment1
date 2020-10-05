@@ -21,9 +21,9 @@ spec:
                 name: postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data #klopt dit? @job
-              name: postgresdb
+              name: de2020
       volumes:
-        - name: postgresdb
+        - name: de2020
           persistentVolumeClaim:
             claimName: postgres-pv-claim
 

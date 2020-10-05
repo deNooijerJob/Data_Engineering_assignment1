@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: bert_app
+spec:
+  replicas: 2 #???
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db-api
+          image: gcr.io/data-engineering2020/assignment1/dbapi:0.0.1
+          volumeMounts:
+            - mountPath: /usr/src/assignment1/models
+              name: model-repo
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          env:
+            - name: PSQL_HOST
+              value: "172.17.0.2"
+            - name: PSQL_PORT
+              value: "5432"
+            - name: PSQL_USR
+              value: "postgres"
+            - name: PSQL_PASS
+              value: "DE2020_group6"
+            - name: PSQL_DB
+              value: "de2020"
+      volumes:
+        - name: model-repo
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+
