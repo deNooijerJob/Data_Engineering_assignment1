@@ -6,8 +6,8 @@ metadata:
     app: postgres
   namespace: bert_app
 data:
-  PSQL_DB: de2020
-  PSQL_USR: postgres
-  PSQL_PASS: DE2020_group6
+  POSTGRES_db: de2020
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: DE2020_group6
 
 #kubectl create -f postgres-configmap.yaml
