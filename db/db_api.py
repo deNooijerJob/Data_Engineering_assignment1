@@ -86,9 +86,9 @@ def insert(table_name):
 
         for i in range(0, len(data)):
             query = "INSERT INTO " + str(table_name) + " VALUES ("
-            for value in data[i]:
-                query = query + value
-                if i < len(data) - 1:
+            for j in range(0, len(data[i])):
+                query = query + data[i][j]
+                if j < len(data[i]) - 1:
                     query = query + ", "
             query = query + ")"
             cur.execute(query)
