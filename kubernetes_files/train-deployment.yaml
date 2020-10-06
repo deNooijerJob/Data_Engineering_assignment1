@@ -29,8 +29,6 @@ spec:
               value: /usr/src/assignment1/models
             - name: DB_API
               value: http://dbAPI:5000/db/bert
-            - name: WANDB_API_KEY
-              value: aa6d9616a65987849a125e185a81ddf699c3b095
 
       volumes:
         - name: model-repo
