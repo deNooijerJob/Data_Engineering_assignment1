@@ -23,7 +23,6 @@ metadata:
     app: postgres
   namespace: bertapp
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
@@ -41,6 +40,5 @@ spec:
   resources:
     requests:
       storage: 5Gi #hoeveel nodig?
-  storageClassName: manual
 
 #kubectl create -f postgres-storage.yaml
