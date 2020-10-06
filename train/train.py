@@ -41,4 +41,4 @@ def train_model(model_name):
 
 
 
-app.run(host='146.148.49.175', port=5000)
+app.run(host='0.0.0.0', port=5000)
