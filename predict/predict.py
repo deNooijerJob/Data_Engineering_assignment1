@@ -20,4 +20,5 @@ def predict(model_name):
 
     return json.dumps(df_no_indices, sort_keys=False, indent=4), 200
 
-app.run(host='0.0.0.0', port=5000)
+
+app.run(host='0.0.0.0', port=5000, threaded=True)
