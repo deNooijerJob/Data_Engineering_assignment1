@@ -37,9 +37,6 @@ def train_model(model_name):
 
         train_data.append(result)
 
-   # train_data_df = pd.DataFrame.from_dict(train_data)
-     # train_data = [item for topic in train_data['data'] for item in topic['paragraphs']]
-   # train_data_df = sample(list(train_data_df), 100)
     if model_name == "bert":
         train_args = {
             'learning_rate': 3e-5,
@@ -54,7 +51,11 @@ def train_model(model_name):
 
         model = QuestionAnsweringModel('bert', "deepset/bert-large-uncased-whole-word-masking-squad2", args=train_args,
                                        use_cuda=False)
-        model.train_model(train_data)
+        try:
+            model.train_model(train_data)
+        except:
+            return json.dumps(train_data, sort_keys=False,
+                              indent=4), 500
         model.save_model(path, model=model.model)
 
 
