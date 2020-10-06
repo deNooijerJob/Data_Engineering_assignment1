@@ -20,7 +20,7 @@ def train_model(model_name):
     train_data = []
     for i in range(0, len(questions)):
         result = {}
-        result['context'] = str(contexts[questions[i][2] - 1][1])
+        result['context'] = str(contexts[questions[i][2]][1])
         qas = []
         instance = {}
         instance['id'] = str(questions[i][5])
@@ -54,7 +54,7 @@ def train_model(model_name):
         try:
             model.train_model(train_data)
         except:
-            return json.dumps(train_data, sort_keys=False,
+            return json.dumps({'message': contexts[questions[0][2]]}, sort_keys=False,
                               indent=4), 500
         model.save_model(path, model=model.model)
 
