@@ -23,10 +23,10 @@ spec:
             - configMapRef:
                 name: postgres-config
           volumeMounts:
-            - mountPath: /usr/src/assignment1/models #klopt dit? @job
-              name: de2020
+            - mountPath: var/lib/postgresql/data #klopt dit? @job
+              name: postgresdb
       volumes:
-        - name: de2020
+        - name: postgresdb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
 

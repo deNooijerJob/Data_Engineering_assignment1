@@ -6,7 +6,7 @@ metadata:
     app: postgres
   namespace: bertapp
 spec:
-  type: LoadBalancer #op internet gebruiken ze NodePort
+  type: NodePort #LoadBalancer?
   ports:
     - port: 5432 #klopt dit? @job
   selector:

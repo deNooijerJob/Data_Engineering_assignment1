@@ -1,19 +1,19 @@
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: postgres-pv-volume
-#  labels:
-#    type: local
-#    app: postgres
-#  namespace: bertapp
-#spec:
-#  storageClassName: manual
-#  capacity:
-#    storage: 10Gi #hoeveel nodig?
-#  accessModes:
-#    - ReadWriteMany
-#  hostPath:
-#    path: "/mnt/data" #klopt dit @job
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv-volume
+  labels:
+    type: local
+    app: postgres
+  namespace: bertapp
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi #hoeveel nodig?
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/nfs/postgres-data" #klopt dit @job
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,22 +23,23 @@ metadata:
     app: postgres
   namespace: bertapp
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 5Gi #hoeveel nodig?
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-model-repo
-  namespace: bertapp
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Gi #hoeveel nodig?
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: postgres-model-repo
+#  namespace: bertapp
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  resources:
+#    requests:
+#      storage: 5Gi #hoeveel nodig?
 
 #kubectl create -f postgres-storage.yaml
