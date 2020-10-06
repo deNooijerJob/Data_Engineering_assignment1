@@ -3,6 +3,7 @@ import requests
 from flask import Flask, json, Response
 from simpletransformers.question_answering import QuestionAnsweringModel
 from random import sample
+import pandas as pd
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -36,9 +37,9 @@ def train_model(model_name):
 
         train_data.append(result)
 
-    train_data_df = pd.DataFrame.from_dict(data)
+    train_data_df = pd.DataFrame.from_dict(train_data)
      # train_data = [item for topic in train_data['data'] for item in topic['paragraphs']]
-    train_data_df = sample(train_data_df, 100)
+   # train_data_df = sample(list(train_data_df), 100)
     if model_name == "bert":
         train_args = {
             'learning_rate': 3e-5,
