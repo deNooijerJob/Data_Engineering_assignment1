@@ -20,24 +20,24 @@ def train_model(model_name):
     train_data = []
     for i in range(0, len(questions)):
         result = {}
-        result['context'] = contexts[questions[i][2] - 1][0]
+        result['context'] = str(contexts[questions[i][2] - 1][1])
         qas = []
         instance = {}
-        instance['id'] = questions[i][5]
+        instance['id'] = str(questions[i][5])
         instance['is_impossible'] = questions[i][4]
-        instance['question'] = questions[i][3]
+        instance['question'] = str(questions[i][3])
         answer = []
         ans = {}
-        ans['text'] = questions[i][1]
+        ans['text'] = str(questions[i][1])
         ans['answer_start'] = questions[i][0]
-        answer.append(answer)
+        answer.append(ans)
         instance['answers'] = answer
         qas.append(instance)
         result['qas'] = qas
 
         train_data.append(result)
 
-    train_data_df = pd.DataFrame.from_dict(train_data)
+   # train_data_df = pd.DataFrame.from_dict(train_data)
      # train_data = [item for topic in train_data['data'] for item in topic['paragraphs']]
    # train_data_df = sample(list(train_data_df), 100)
     if model_name == "bert":
@@ -54,7 +54,7 @@ def train_model(model_name):
 
         model = QuestionAnsweringModel('bert', "deepset/bert-large-uncased-whole-word-masking-squad2", args=train_args,
                                        use_cuda=False)
-        model.train_model(train_data_df)
+        model.train_model(train_data)
         model.save_model(path, model=model.model)
 
 
