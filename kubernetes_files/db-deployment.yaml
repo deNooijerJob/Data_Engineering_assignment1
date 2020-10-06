@@ -38,5 +38,5 @@ spec:
       volumes:
         - name: model-repo
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: data-psql-postgresql-0
 
