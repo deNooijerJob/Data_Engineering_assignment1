@@ -18,9 +18,6 @@ spec:
       containers:
         - name: db-api
           image: gcr.io/data-engineering2020/assignment1/dbapi:0.0.1
-          volumeMounts:
-            - mountPath: /usr/src/assignment1/models
-              name: model-repo
           ports:
             - containerPort: 5000
               protocol: TCP
@@ -35,8 +32,4 @@ spec:
               value: "DE2020_group6"
             - name: PSQL_DB
               value: "de2020"
-      volumes:
-        - name: model-repo
-          persistentVolumeClaim:
-            claimName: data-psql-postgresql-0
 

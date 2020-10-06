@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: model-repo
           persistentVolumeClaim:
-            claimName: data-psql-postgresql-0
+            claimName: nfs-model-repo
