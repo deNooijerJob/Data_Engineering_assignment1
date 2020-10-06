@@ -22,14 +22,14 @@ def get_content(table_name):
     try:
         conn = connect()
         cur = conn.cursor()
-        if not table_name == 'bert':
+        if not table_name == 'contexts':
             query = "SELECT * FROM " + str(table_name)
 
             print(query)
             cur.execute(query)
             records = cur.fetchall()
         else:
-            query = "SELECT * FROM " + str(table_name) + "ORDER BY qas_context_link ASC"
+            query = "SELECT * FROM " + str(table_name) + " ORDER BY qas_context_link ASC"
 
             print(query)
             cur.execute(query)
