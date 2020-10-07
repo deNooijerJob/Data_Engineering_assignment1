@@ -16,7 +16,7 @@ COPY . .
 #expose the container port
 EXPOSE 5000
 
-ENV DB_API  http://dbAPI:5000/db/bert
+ENV DB_API  http://dbAPI:5000/db/test_json
 ENV MODEL_REPO  /usr/src/assignment1/models
 
 #Set env variables

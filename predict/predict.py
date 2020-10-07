@@ -9,7 +9,7 @@ app.config["DEBUG"] = True
 @app.route('/predict/<model_name>', methods=['POST'])
 def predict(model_name):
     path = os.environ['MODEL_REPO'] + "/" + model_name
-    model = QuestionAnsweringModel(model_name, path, use_cuda=False)
+    model = QuestionAnsweringModel(model_name, path+"/", use_cuda=False)
     question = request.get_json()
 
     result = model.predict(question)
@@ -20,4 +20,5 @@ def predict(model_name):
 
     return json.dumps(df_no_indices, sort_keys=False, indent=4), 200
 
-app.run(host='0.0.0.0', port=5000)
+
+app.run(host='0.0.0.0', port=5000, threaded=True)
