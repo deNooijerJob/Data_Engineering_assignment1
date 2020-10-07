@@ -33,7 +33,7 @@ spec:
             - name: MODEL_REPO
               value: /usr/src/assignment1/models
             - name: DB_API
-              value: http://dbAPI:5000/db/bert
+              value: http://dbAPI:5000/db/test_json
 
       volumes:
         - name: model-repo
