@@ -2,12 +2,13 @@ from flask import Flask, json, request, Response
 import psycopg2 as ps
 import os
 
-app = Flask(__name__)
+app = Flask(__name__) # create flask app 
 app.config["DEBUG"] = True
-conn = None
+conn = None # init conn
 
+# connect to database fundtion
 def connect():
-    conn = ps.connect(
+    conn = ps.connect( # set arguments  to establish connection
         host=os.environ['PSQL_HOST'],
         port=os.environ['PSQL_PORT'],
         user=os.environ['PSQL_USR'],
@@ -16,18 +17,21 @@ def connect():
     )
     return conn
 
-
+# get content from table
 @app.route('/db/<table_name>', methods=['GET'])
 def get_content(table_name):
     try:
-        conn = connect()
-        cur = conn.cursor()
+        conn = connect() # connect
+        cur = conn.cursor() # create db instance 
+        
+        # build query for every table apart from context 
         if not table_name == 'contexts':
             query = "SELECT * FROM " + str(table_name)
 
             print(query)
             cur.execute(query)
             records = cur.fetchall()
+        # create query for contexts table    
         else:
             query = "SELECT * FROM " + str(table_name) + " ORDER BY qas_context_link ASC"
 
