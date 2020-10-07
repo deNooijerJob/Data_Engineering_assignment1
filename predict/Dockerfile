@@ -1,4 +1,4 @@
-# use python3 as the base image for the db api"
+# use python3 as the base image for the predict api"
 FROM python:3.7.7-buster
 
 # set the shared work directory for assignment1
@@ -16,10 +16,8 @@ COPY . .
 #expose the container port
 EXPOSE 5000
 
+# environment variable to access the shared model repository
 ENV MODEL_REPO  /usr/src/assignment1/models
-
-#Set env variables
-
 
 #run the api
 CMD ["python3", "predict.py"]
