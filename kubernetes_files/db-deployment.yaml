@@ -19,7 +19,7 @@ spec:
         - name: db-api
           image: gcr.io/data-engineering2020/dbapi:0.0.1 #the adress to the dbapi image that we pushed to the google image repository
           ports:
-            - containerPort: 5000
+            - containerPort: 5000 #port exposed as in dockerfile
               protocol: TCP
           env: #setting the environment variables that were defined in the docker file of dbapi
             - name: PSQL_HOST
