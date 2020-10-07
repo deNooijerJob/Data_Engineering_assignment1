@@ -9,7 +9,7 @@ app.config["DEBUG"] = True
 @app.route('/predict/<model_name>', methods=['POST'])
 def predict(model_name):
     path = os.environ['MODEL_REPO'] + "/" + model_name
-    model = QuestionAnsweringModel(model_name, path, use_cuda=False)
+    model = QuestionAnsweringModel(model_name, path+"/", use_cuda=False)
     question = request.get_json()
 
     result = model.predict(question)
