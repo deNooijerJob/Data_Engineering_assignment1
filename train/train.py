@@ -11,10 +11,10 @@ app.config["DEBUG"] = True
 
 @app.route('/train/<model_name>', methods=['POST'])
 def train_model(model_name):
-
+    api = os.environ['DB_API']
     path = os.environ['MODEL_REPO'] + "/" + model_name
 
-    request_test = requests.get("http://dbAPI:5000/db/test_json")
+    request_test = requests.get(api)
     train_data = request_test.json()[0][0]
     model = None
     if model_name == "bert":
