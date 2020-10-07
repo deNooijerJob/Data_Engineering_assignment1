@@ -16,7 +16,7 @@ spec:
         app: db
     spec:
       containers:
-        - name: db-api
+        - name: dbAPI
           image: gcr.io/data-engineering2020/dbapi:0.0.1
           ports:
             - containerPort: 5000
