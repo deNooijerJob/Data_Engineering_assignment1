@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: predict
+  name: predict
+  namespace: bertapp
+spec:
+  replicas: 2 #hoeveel pods hebben we nodig?
+  selector:
+    matchLabels:
+      app: predict
+  template:
+    metadata:
+      labels:
+        app: predict
+    spec:
+      containers:
+        - name: predict-api
+          image: gcr.io/data-engineering2020/predict:0.0.1 #image van gcp die wij hebben gepusht
+          volumeMounts:
+            - mountPath: /usr/src/assignment1/models #klopt dit? andere mountPath dan postgress
+              name: model-repo
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          env:
+            - name: MODEL_REPO
+              value: /usr/src/assignment1/models
+      volumes:
+        - name: model-repo
+          persistentVolumeClaim:
+            claimName: nfs-model-repo
