@@ -6,9 +6,9 @@ metadata:
     app: predict
   namespace: bertapp
 spec:
-  type: LoadBalancer
+  type: LoadBalancer #using loadbalancer in order to allow external connections
   ports:
-    - port: 5002
+    - port: 5002 #making sure that we can acces the dbapi, if we need to manually edit our training data database, via the port 5000
       targetPort: 5000
   selector:
     app: predict
