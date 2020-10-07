@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: predict-api
-          image: gcr.io/data-engineering2020/assignment1/predict:0.0.1 #image van gcp die wij hebben gepusht
+          image: gcr.io/data-engineering2020/predict:0.0.1 #image van gcp die wij hebben gepusht
           volumeMounts:
             - mountPath: /usr/src/assignment1/models #klopt dit? andere mountPath dan postgress
               name: model-repo

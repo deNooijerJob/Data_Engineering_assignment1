@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: train-api
-          image: gcr.io/data-engineering2020/assignment1/train:0.0.1 #gcp push
+          image: gcr.io/data-engineering2020/train:0.0.1 #gcp push
           resources:
             requests:
               memory: "2Gi"
