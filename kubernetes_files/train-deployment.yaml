@@ -20,9 +20,9 @@ spec:
           image: gcr.io/data-engineering2020/train:0.0.1 #gcp push
           resources:
             requests:
-              memory: "2Gi"
+              memory: "1Gi"
             limits:
-              memory: "5Gi"
+              memory: "3Gi"
           volumeMounts:
             - mountPath: /usr/src/assignment1/models
               name: model-repo
