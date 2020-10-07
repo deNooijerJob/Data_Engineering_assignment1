@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: bertapp
+  name: bertapp #creating the namespace named bertapp for all the components that we will deploy in kubernetes
