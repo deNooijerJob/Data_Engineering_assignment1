@@ -6,9 +6,9 @@ metadata:
     app: train
   namespace: bertapp
 spec:
-  type: LoadBalancer
+  type: LoadBalancer #preferred for external acces
   ports:
-    - port: 5001
-      targetPort: 5000
+    - port: 5001 #making sure the training can be started via port 5001
+      targetPort: 5000 
   selector:
     app: train
