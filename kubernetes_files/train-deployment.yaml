@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: train
+  name: train
+  namespace: bertapp
+spec:
+  replicas: 2 #hoeveel pods nodig?
+  selector:
+    matchLabels:
+      app: train
+  template:
+    metadata:
+      labels:
+        app: train
+    spec:
+      containers:
+        - name: train-api
+          image: gcr.io/data-engineering2020/train:0.0.1 #gcp push
+          volumeMounts:
+            - mountPath: /usr/src/assignment1/models
+              name: model-repo
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          resources:
+            requests:
+              memory: 2Gi #training is a memory intensive process therefore we allocate a minimum amount of memory to the train pods which influences the pod assignment to nodes
+            limits:
+              memory: 4Gi #maximum memory of pod
+          env:
+            - name: MODEL_REPO
+              value: /usr/src/assignment1/models
+            - name: DB_API
+              value: http://35.193.21.248:5000/db/test_json #ip needs to be replaced with external ip of db-service
+
+      volumes:
+        - name: model-repo
+          persistentVolumeClaim:
+            claimName: nfs-model-repo

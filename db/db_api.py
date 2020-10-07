@@ -22,18 +22,24 @@ def get_content(table_name):
     try:
         conn = connect()
         cur = conn.cursor()
+        if not table_name == 'contexts':
+            query = "SELECT * FROM " + str(table_name)
 
-        query = "SELECT * FROM " + str(table_name)
+            print(query)
+            cur.execute(query)
+            records = cur.fetchall()
+        else:
+            query = "SELECT * FROM " + str(table_name) + " ORDER BY qas_context_link ASC"
 
-        print(query)
-        cur.execute(query)
-        records = cur.fetchall()
+            print(query)
+            cur.execute(query)
+            records = cur.fetchall()
 
         cur.close()
         conn.commit()
     except (Exception, ps.DatabaseError) as error:
         print(error)
-        return  json.dumps({'message': error}, sort_keys=False, indent=4), 500
+        return json.dumps({'message': error}, sort_keys=False, indent=4), 500
 
     finally:
         if conn is not None:
@@ -121,4 +127,4 @@ def insert(table_name):
 
 
 
-app.run(host='0.0.0.0', port=5000)
+app.run(host='0.0.0.0', port=5000, threaded=True)
