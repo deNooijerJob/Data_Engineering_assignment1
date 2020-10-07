@@ -23,7 +23,7 @@ spec:
               protocol: TCP
           env:
             - name: PSQL_HOST
-              value: "35.225.153.107"
+              value: "34.122.90.27"
             - name: PSQL_PORT
               value: "5432"
             - name: PSQL_USR
