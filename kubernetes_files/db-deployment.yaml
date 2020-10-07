@@ -21,15 +21,15 @@ spec:
           ports:
             - containerPort: 5000
               protocol: TCP
-          env:
+          env: #setting the environment variables that were defined in the docker file of dbapi
             - name: PSQL_HOST
               value: "34.122.90.27" #this ip should be changed before deploying the pod to the external ip that is assigned to postgreSQL by the loadbalancer
             - name: PSQL_PORT
-              value: "5432"
+              value: "5432" #standard port for postgreSQL
             - name: PSQL_USR
-              value: "postgres"
+              value: "postgres" #standard user for postgreSQL
             - name: PSQL_PASS
               value: "DE2020_group6"
             - name: PSQL_DB
-              value: "de2020"
+              value: "de2020" #database that stores the training data
 
