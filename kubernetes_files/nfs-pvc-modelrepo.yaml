@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-model-repo
+  name: nfs-model-repo #claiming some of the persistent volume to store and retrieve the models for training and predicting
   namespace: bertapp
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteMany #making sure that more than one container can acces the memory
   resources:
     requests:
       storage: 15Gi
