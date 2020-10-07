@@ -6,7 +6,7 @@ metadata:
   name: predict
   namespace: bertapp
 spec:
-  replicas: 2 #hoeveel pods hebben we nodig?
+  replicas: 2 #in case one pod fails, ensures kubernetes self healing
   selector:
     matchLabels:
       app: predict
@@ -17,17 +17,17 @@ spec:
     spec:
       containers:
         - name: predict-api
-          image: gcr.io/data-engineering2020/predict:0.0.1 #image van gcp die wij hebben gepusht
+          image: gcr.io/data-engineering2020/predict:0.0.1 #the adress of the image of the predict api that we pushed to the google image repository 
           volumeMounts:
-            - mountPath: /usr/src/assignment1/models #klopt dit? andere mountPath dan postgress
+            - mountPath: /usr/src/assignment1/models #the path that is used by the predict api to retrieve the model that was trained
               name: model-repo
           ports:
-            - containerPort: 5000
+            - containerPort: 5000 #port exposed as in dockerfile
               protocol: TCP
           env:
-            - name: MODEL_REPO
+            - name: MODEL_REPO #environment variable from the dockerfile
               value: /usr/src/assignment1/models
       volumes:
         - name: model-repo
-          persistentVolumeClaim:
+          persistentVolumeClaim: #claiming the persistent volume 
             claimName: nfs-model-repo
