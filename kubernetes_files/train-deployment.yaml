@@ -6,7 +6,7 @@ metadata:
   name: train
   namespace: bertapp
 spec:
-  replicas: 2 #hoeveel pods nodig?
+  replicas: 2 #in case one pod fails, ensures kubernetes self healing (altough self healing seems broken due to the training start up issue that was described in the report)
   selector:
     matchLabels:
       app: train
@@ -17,25 +17,25 @@ spec:
     spec:
       containers:
         - name: train-api
-          image: gcr.io/data-engineering2020/train:0.0.1 #gcp push
+          image: gcr.io/data-engineering2020/train:0.0.1 #adress to the train api image that was pushed to gcp repository
           volumeMounts:
             - mountPath: /usr/src/assignment1/models
               name: model-repo
           ports:
-            - containerPort: 5000
+            - containerPort: 5000 #port exposed as in dockerfile
               protocol: TCP
           resources:
-            requests:
-              memory: 2Gi #training is a memory intensive process therefore we allocate a minimum amount of memory to the train pods which influences the pod assignment to nodes
+            requests: 
+              memory: 2Gi #training is a memory intensive process (escpecially for big train data sets) therefore we allocate a minimum amount of memory to the train pods which influences the pod assignment to nodes
             limits:
-              memory: 4Gi #maximum memory of pod
-          env:
+              memory: 4Gi #maximum memory of pod to ensure that the pod does not claim more memory then the node has available resulting in an OOM termination
+          env: #environment variables that were defined in the dockerfile
             - name: MODEL_REPO
-              value: /usr/src/assignment1/models
+              value: /usr/src/assignment1/models #path that is used by the train api to store the downloaded and trained models
             - name: DB_API
-              value: http://35.193.21.248:5000/db/test_json #ip needs to be replaced with external ip of db-service
+              value: http://35.193.21.248:5000/db/test_json #ip needs to be replaced with external ip that is assigned to by load balancer db-service
 
       volumes:
         - name: model-repo
-          persistentVolumeClaim:
+          persistentVolumeClaim: #making sure the models can be stored
             claimName: nfs-model-repo
