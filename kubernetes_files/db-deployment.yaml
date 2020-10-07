@@ -6,7 +6,7 @@ metadata:
   name: db
   namespace: bertapp
 spec:
-  replicas: 2 #???
+  replicas: 2 #in case one pod fails, ensures kubernetes self healing
   selector:
     matchLabels:
       app: db
@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
         - name: db-api
-          image: gcr.io/data-engineering2020/dbapi:0.0.1
+          image: gcr.io/data-engineering2020/dbapi:0.0.1 #the adress to the dbapi image that we pushed to the google image repository
           ports:
             - containerPort: 5000
               protocol: TCP
           env:
             - name: PSQL_HOST
-              value: "34.122.90.27"
+              value: "34.122.90.27" #this ip should be changed before deploying the pod to the external ip that is assigned to postgreSQL by the loadbalancer
             - name: PSQL_PORT
               value: "5432"
             - name: PSQL_USR
